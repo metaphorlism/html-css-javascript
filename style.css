@@ -1,0 +1,82 @@
+:root {
+  --h-image-container: 300px; /* Height of the image container */
+  --w-image-container: 500px; /* Width of the image container */
+  --w-range-thumb: 6px; /* Width of the range's thumb (slider) */
+  --clr-range-thumb: green; /* Color of the slider */
+}
+
+#container {
+  position: relative;
+  width: var(--w-image-container);
+  height: var(--h-image-container);
+  border-radius: 10px;
+  margin: 2rem auto;
+}
+
+#first-image,
+#second-image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+}
+
+#image-slider {
+  position: absolute;
+  /* Width range from left to right and width of the thumb of slider */
+  width: calc(100% + var(--w-range-thumb)); 
+  /* Center the input field */
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  margin: 0;
+  background-color: transparent;
+}
+
+#image-slider::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  color: transparent;
+}
+
+#image-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: none;
+  height: var(--h-image-container);
+  width: var(--w-range-thumb);
+  border-radius: 50%;
+  background: var(--clr-range-thumb);
+  margin-top: -4px;
+}
+
+/* FireFox */
+#image-slider::-moz-range-progress {
+  background-color: transparent;
+}
+
+#image-slider::-moz-range-track {
+  background-color: transparent;
+}
+
+#image-slider::-moz-range-thumb {
+  border: none;
+  height: var(--h-image-container);
+  width: var(--w-range-thumb);
+  background: var(--clr-range-thumb);
+}
+
+/* IE */
+#image-slider::-ms-fill-lower {
+  background-color: transparent;
+}
+
+#image-slider::-ms-fill-upper {
+  background-color: transparent;
+}
+
+#image-slider::-ms-thumb {
+  border: none;
+  height: var(--h-image-container);
+  width: var(--w-range-thumb);
+  border-radius: 50%;
+  background: var(--clr-range-thumb);
+}
