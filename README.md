@@ -82,30 +82,29 @@ Create keyframe for our animation. There are 2 animation like reveal (typing) an
   justify-content: center;
   margin-top: 20rem;
   background-color: inherit;
-  
-  &__sentence {
-    position: relative; /* Need relative pos for after's absolute pos */
-    font-size: var(--size-font);
-    text-transform: uppercase;
-    background-color: inherit;
-    letter-spacing: var(--letter-spacing);
-    
-    &::after {
-      content: ""; /* After need empty content */
-      position: absolute;
-      inset: 0; /* Top: 0; Left: 0; Right: 0; Bottom: 0; */
-      background-color: inherit;
-      /* Create line with left border */
-      border-left: var(--w-line) solid var(--clr-line);
-      /* In animation we need to run typing animation 
-       * first before blinking animtion start.
-       * Because when you typing blinking animation is not exist
-       * Steps accept value of the length of the text */
-      animation: 
-        var(--duration-typing) steps(var(--length-letter)) forwards typing, 
-        var(--duration-blinking) linear var(--duration-typing) infinite blinking;
-    }
-  }
+}
+
+.container__sentence {
+  position: relative; /* Need relative pos for after's absolute pos */
+  font-size: var(--size-font);
+  text-transform: uppercase;
+  background-color: inherit;
+  letter-spacing: var(--letter-spacing);
+}
+
+.container__sentence::after {
+  content: ""; /* After need empty content */
+  position: absolute;
+  inset: 0; /* Top: 0; Left: 0; Right: 0; Bottom: 0; */
+  background-color: inherit;
+  /* Create line with left border */
+  border-left: var(--w-line) solid var(--clr-line);
+  /* In animation we need to run typing animation 
+   * first before blinking animtion start.
+   * Because when you typing blinking animation is not exist
+   * Steps accept value of the length of the text */
+  animation: var(--duration-typing) steps(var(--length-letter)) forwards typing,
+    var(--duration-blinking) linear var(--duration-typing) infinite blinking;
 }
 ```
 If you want to make it dynamic it'll require `JavaScript` to acheive it.
