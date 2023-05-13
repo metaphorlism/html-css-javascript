@@ -1,82 +1,74 @@
-:root {
-  --h-image-container: 300px; /* Height of the image container */
-  --w-image-container: 500px; /* Width of the image container */
-  --w-range-thumb: 6px; /* Width of the range's thumb (slider) */
-  --clr-range-thumb: green; /* Color of the slider */
-}
-
-#container {
-  position: relative;
-  width: var(--w-image-container);
-  height: var(--h-image-container);
-  border-radius: 10px;
-  margin: 2rem auto;
-}
-
-#first-image,
-#second-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-}
-
-#image-slider {
-  position: absolute;
-  /* Width range from left to right and width of the thumb of slider */
-  width: calc(100% + var(--w-range-thumb)); 
-  /* Center the input field */
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
+*, 
+*::after, 
+*::before {
   margin: 0;
-  background-color: transparent;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
 }
 
-#image-slider::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  color: transparent;
+:root {
+  --clr-background: #cecece;
+  --clr-text: #000;
+  --clr-line: black;
+  --clr-line-low: rgba(0, 0, 0, 0.3);
+  --w-line: 5px;
+  --size-font: 3.2rem;
+  --letter-spacing: 1rem;
+  --duration-typing: 5s;
+  --duration-blinking: 1s;
+  --length-letter: 15;
 }
 
-#image-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  border-radius: 50%;
-  background: var(--clr-range-thumb);
-  margin-top: -4px;
+body {
+  background-color: var(--clr-background);
 }
 
-/* FireFox */
-#image-slider::-moz-range-progress {
-  background-color: transparent;
+.container {
+  /* Centering the text */
+  display: flex;
+  justify-content: center;
+  margin-top: 20rem;
+  background-color: inherit;
+}
+.container__sentence {
+  position: relative; /* Need relative pos for after's absolute pos */
+  font-size: var(--size-font);
+  text-transform: uppercase;
+  background-color: inherit;
+  letter-spacing: var(--letter-spacing);
+}
+.container__sentence::after {
+  content: ""; /* After need empty content */
+  position: absolute;
+  inset: 0; /* Top: 0; Left: 0; Right: 0; Bottom: 0; */
+  background-color: inherit;
+  /* Create line with left border */
+  border-left: var(--w-line) solid var(--clr-line);
+  /* In animation we need to run typing animation 
+   * first before blinking animtion start.
+   * Because when you typing blinking animation is not exist
+   * Steps accept value of the length of the text */
+  animation: var(--duration-typing) steps(var(--length-letter)) forwards typing,
+    var(--duration-blinking) linear var(--duration-typing) infinite blinking;
 }
 
-#image-slider::-moz-range-track {
-  background-color: transparent;
+@keyframes typing {
+  from {
+    left: 0px;
+  }
+  to {
+    left: 100%;
+  }
 }
-
-#image-slider::-moz-range-thumb {
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  background: var(--clr-range-thumb);
-}
-
-/* IE */
-#image-slider::-ms-fill-lower {
-  background-color: transparent;
-}
-
-#image-slider::-ms-fill-upper {
-  background-color: transparent;
-}
-
-#image-slider::-ms-thumb {
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  border-radius: 50%;
-  background: var(--clr-range-thumb);
+@keyframes blinking {
+  0% {
+    border-left-color: var(--clr-line);
+  }
+  50% {
+    border-left-color: var(--clr-line-low);
+  }
+  100% {
+    border-left-color: var(--clr-line);
+  }
 }

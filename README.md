@@ -1,199 +1,117 @@
-# Compare Your Image  
+# Text Typing Animation
+![Example](https://hackmd.io/_uploads/Sy3eqf54h.png)  
 
-## How does it work  
+## How does it work
+![Architecture](https://hackmd.io/_uploads/B1DQ57qN2.png)
+We do smooth reveal our text but in typing we don't want typing to be smoothly reveal we want to reveal 1 text at a time. We can get it by using `steps` in `css` to reveal many letters you want by giving it text length.
 
-![Achitecture](https://hackmd.io/_uploads/ByGtYpu4h.png)  
-
-## There are two methods  
-
-1. We clip both of the image.  
-
-![Compare In Action](https://hackmd.io/_uploads/rJMFFauEn.png)  
-
-2. We clip the front layer image.  
-
-![Compare In Action v2](https://hackmd.io/_uploads/H1fKFadVn.png)  
-
-## Code  
-
-**1st Method**  
-
-Import your style and script into your HTML file.
-```htmlembedded
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Compare 2 Images</title>
-    <link rel="stylesheet" href="./style.css" />
-    <script src="./script.js" defer></script>
- </head>
+## Code
+**_NOTE:_** We are putting text in container because we want to show the animation in the middle of the website. You don't need to if you want.
+```html
+<div class="container">
+  <span class="container__sentence">Hello Not World World Hello</span>
+</div>
 ```
 
-```htmlembedded
-<body>
-    <div id="container">
-        <img
-            src=<image-src>
-            alt=<image-src-name>
-            id="first-image"
-        />
-        <img
-            src=<image-src>
-            alt=<image-src-name>
-            id="second-image"
-        />
-        <input
-            type="range"
-            name="slider"
-            id="image-slider"
-            min="0"
-            max="100"
-            value="50"
-        />
-    </div>
-</body>
-```
+In CSS file:
 
-Create CSS file
+```css
+*, 
+*::after, 
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+```  
+**_NOTE:_** For typing animation we need monospace font for each frame.
+
+![Monospace Font Comparation](//upload.wikimedia.org/wikipedia/commons/thumb/9/99/Proportional-vs-monospace-v5.svg/400px-Proportional-vs-monospace-v5.svg.png)  
+
+> A monospaced font, also called a fixed-pitch, fixed-width, or non-proportional font, is a font whose letters and characters each occupy the same amount of horizontal space. [Wikipedia](https://en.wikipedia.org/wiki/Monospaced_font)
+
+By using monospace font we can use steps() in our animation property.
+
+Initailize your variable in `:root` selector before go into styling. So you can change everything from variable.
 
 ```css
 :root {
-  --h-image-container: 300px; /* Height of the image container */
-  --w-image-container: 500px; /* Width of the image container */
-  --w-range-thumb: 6px; /* Width of the range's thumb (slider) */
-  --clr-range-thumb: green; /* Color of the slider */
+  --clr-background: #cecece;
+  --clr-text: #000;
+  --clr-line: black;
+  --clr-line-low: rgba(0, 0, 0, .3);
+  --w-line: 5px;
+  --size-font: 3.2rem;
+  --letter-spacing: 1rem;
+  --duration-typing: 5s;
+  --duration-blinking: 1s;
+  --length-letter: 15;
 }
 
-#container {
-  position: relative;
-  width: var(--w-image-container);
-  height: var(--h-image-container);
-  border-radius: 10px;
-  margin: 2rem auto;
-}
-
-#first-image,
-#second-image {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-}
-
-#image-slider {
-  position: absolute;
-  /* Width range from left to right and width of the thumb of slider */
-  width: calc(100% + var(--w-range-thumb)); 
-  /* Center the input field */
-  top: 50%;
-  left: 50%;
-  translate: -50% -50%;
-  margin: 0;
-  background-color: transparent;
-}
-
-#image-slider::-webkit-slider-runnable-track {
-  -webkit-appearance: none;
-  color: transparent;
-}
-
-#image-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  border-radius: 50%;
-  background: var(--clr-range-thumb);
-  margin-top: -4px;
-}
-
-/* FireFox */
-#image-slider::-moz-range-progress {
-  background-color: transparent;
-}
-
-#image-slider::-moz-range-track {
-  background-color: transparent;
-}
-
-#image-slider::-moz-range-thumb {
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  background: var(--clr-range-thumb);
-}
-
-/* IE */
-#image-slider::-ms-fill-lower {
-  background-color: transparent;
-}
-
-#image-slider::-ms-fill-upper {
-  background-color: transparent;
-}
-
-#image-slider::-ms-thumb {
-  border: none;
-  height: var(--h-image-container);
-  width: var(--w-range-thumb);
-  border-radius: 50%;
-  background: var(--clr-range-thumb);
+body {
+  background-color: var(--clr-background);
 }
 ```
- 
-Create JavaScript file
-
-```javascript
-// Get the elements of the slider, first image and second images
-const slider = document.getElementById("image-slider");
-const imageEl1 = document.getElementById("first-image");
-const imageEl2 = document.getElementById("second-image");
-
-clipImage(); // Clip the image
-
-// Add event listener to slider
-slider.oninput = () => clipImage();
-
-function clipImage() {
-  // Clip First Image
-  imageEl1.style.clipPath = `inset(0 ${
-    imageEl1.width - (imageEl1.width * slider.value) / 100
-  }px 0 0)`;
-
-  // Clip Second Image
-  imageEl2.style.clipPath = `inset(0 0 0 ${
-    (imageEl2.width * slider.value) / 100
-  }px)`;
-}
-```
-
-We are using inset of clip path in css to clip the image.  
+Create keyframe for our animation. There are 2 animation like reveal (typing) and blinking animation.
 ```css
-CSSClassSelector {
-    /* inset(top right bottom left) */
-    clip-path: inset(0 0 0 0);
+@keyframes typing {
+  from {
+    left: 0px;
+  }to {
+    left: 100%;
+  }
+}
+
+@keyframes blinking {
+  0% {
+    border-left-color: var(--clr-line);
+  } 50% {
+    border-left-color: var(--clr-line-low);
+  } 100% {
+    border-left-color: var(--clr-line);
+  }
 }
 ```
-![Clip path inset example](https://hackmd.io/_uploads/HJd21RON2.png)
 
-**2nd Method**  
 
+```css
+.container {
+  /* Centering the text */
+  display: flex;
+  justify-content: center;
+  margin-top: 20rem;
+  background-color: inherit;
+  
+  &__sentence {
+    position: relative; /* Need relative pos for after's absolute pos */
+    font-size: var(--size-font);
+    text-transform: uppercase;
+    background-color: inherit;
+    letter-spacing: var(--letter-spacing);
+    
+    &::after {
+      content: ""; /* After need empty content */
+      position: absolute;
+      inset: 0; /* Top: 0; Left: 0; Right: 0; Bottom: 0; */
+      background-color: inherit;
+      /* Create line with left border */
+      border-left: var(--w-line) solid var(--clr-line);
+      /* In animation we need to run typing animation 
+       * first before blinking animtion start.
+       * Because when you typing blinking animation is not exist
+       * Steps accept value of the length of the text */
+      animation: 
+        var(--duration-typing) steps(var(--length-letter)) forwards typing, 
+        var(--duration-blinking) linear var(--duration-typing) infinite blinking;
+    }
+  }
+}
+```
+If you want to make it dynamic it'll require `JavaScript` to acheive it.
 ```javascript
-// Get the elements of the slider and front images
-const slider = document.getElementById("image-slider");
-// We are choosing second image as front iamges because it on top of the other image
-const imageEl = document.getElementById("second-image");
-
-clipImage(); // Clip the image
-
-// Add event listener to slider
-slider.oninput = () => clipImage();
-
-function clipImage() {
-  // Clip the image
-  imageEl.style.clipPath = `inset(0 0 0 ${
-    (imageEl.width * slider.value) / 100
-  }px)`;
-}
+const textEl = document.querySelector(".container__sentence")
+// Set variable in the css for steps
+textEl.style.setProperty("--length-letter", textEl.innerText.length)
 ```
+When set new property to element to will overwrite the variable from `:root`.
