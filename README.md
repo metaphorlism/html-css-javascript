@@ -63,9 +63,11 @@ inputEl.addEventListener("change", (event) => {
 
 ### On Browser
 
-**Before**
+**Before**  
+
 ![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)
-**After**
+**After**  
+
 ![After](https://hackmd.io/_uploads/S13ff7iUn.png)
 
 ## Resource
