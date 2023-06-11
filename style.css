@@ -1,5 +1,5 @@
-*, 
-*::after, 
+*,
+*::after,
 *::before {
   margin: 0;
   padding: 0;
@@ -7,68 +7,13 @@
   font-family: monospace;
 }
 
-:root {
-  --clr-background: #cecece;
-  --clr-text: #000;
-  --clr-line: black;
-  --clr-line-low: rgba(0, 0, 0, 0.3);
-  --w-line: 5px;
-  --size-font: 3.2rem;
-  --letter-spacing: 1rem;
-  --duration-typing: 5s;
-  --duration-blinking: 1s;
-  --length-letter: 15;
-}
-
-body {
-  background-color: var(--clr-background);
+#preview {
+  height: 100%;
 }
 
 .container {
-  /* Centering the text */
   display: flex;
   justify-content: center;
-  margin-top: 20rem;
-  background-color: inherit;
-}
-.container__sentence {
-  position: relative; /* Need relative pos for after's absolute pos */
-  font-size: var(--size-font);
-  text-transform: uppercase;
-  background-color: inherit;
-  letter-spacing: var(--letter-spacing);
-}
-.container__sentence::after {
-  content: ""; /* After need empty content */
-  position: absolute;
-  inset: 0; /* Top: 0; Left: 0; Right: 0; Bottom: 0; */
-  background-color: inherit;
-  /* Create line with left border */
-  border-left: var(--w-line) solid var(--clr-line);
-  /* In animation we need to run typing animation 
-   * first before blinking animtion start.
-   * Because when you typing blinking animation is not exist
-   * Steps accept value of the length of the text */
-  animation: var(--duration-typing) steps(var(--length-letter)) forwards typing,
-    var(--duration-blinking) linear var(--duration-typing) infinite blinking;
-}
-
-@keyframes typing {
-  from {
-    left: 0px;
-  }
-  to {
-    left: 100%;
-  }
-}
-@keyframes blinking {
-  0% {
-    border-left-color: var(--clr-line);
-  }
-  50% {
-    border-left-color: var(--clr-line-low);
-  }
-  100% {
-    border-left-color: var(--clr-line);
-  }
+  width: 500px;
+  height: 500px;
 }
