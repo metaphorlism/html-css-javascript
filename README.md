@@ -1,4 +1,4 @@
-# Image Preview
+# Import Text
 
 Import your text from your text file into your website using HTML, CSS and JavaScript.
 
@@ -6,69 +6,131 @@ Import your text from your text file into your website using HTML, CSS and JavaS
 
 ### HTML
 
+We create normal html. We are using pre tag because it'll make our text from file we imported look the same.
+
 ```html
-<input type="file" id="input" accept="image/*" />
-<div class="container">
-  <img src="#" id="preview" />
+<div id="container">
+  <input type="file" id="input" />
+  <pre id="text"></pre>
 </div>
 ```
 
 ### CSS
 
+We create a little bit of styling to make it look a bit organize.
+
 ```css
-#preview {
-  height: 100%;
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.container {
+#container {
   display: flex;
-  justify-content: center;
-  width: 500px;
-  height: 500px;
+  flex-direction: column;
+  width: 50rem;
+  margin: 0 auto;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+#text {
+  resize: none;
+  overflow: hidden;
 }
 ```
 
 ### JavaScript
 
+In our javascript we need our input element and text element.
+
 ```js
 const inputEl = document.getElementById("input");
-const previewEl = document.getElementById("preview");
+const textEl = document.getElementById("text");
+```
 
-// Create on change function input for #input
-inputEl.addEventListener("change", (event) => {
-  // Get the file from input
-  const file = event.target.files[0];
+Assign change event to input element. When our input element change it'll call the inputChangeHandler function.
 
-  // You can set allow extension before set file into image tag in html
-  // Using regex in order to check filename extension
-  // \.jpg | \.jpeg | \.png | \.gif ... are file extension you can add and remove
-  // '\' to escape the '.' character
-  // '$' anchors the pattern to the end of the string
-  // 'i' case-insensitive
-  const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
+```js
+inputEl.addEventListener("change", inputChangeHandler);
+```
 
-  // Check the file extension
-  if (!allowedExtensions.exec(file.name)) {
+Let's create our inputChangeHandler function.
+
+1. Create reader variable
+2. Check if `File`, `FileReader`, `FileList` and `Blob` api is available
+3. Create a new instance of FileReader object and assign it to our reader variable
+4. If api is not available, we'll send alert and return
+
+```js
+let reader;
+if (window.File && window.FileReader && window.FileList && window.Blob) {
+  reader = new FileReader();
+} else {
+  alert(
+    "The File APIs are not fully supported by your browser. Fallback required."
+  );
+  return;
+}
+```
+
+Let's work the file from user now.
+
+1. Check if is file does exist
+2. We will set `onload` event to reader. The event is triggered when file is successfully load.
+3. Set reader to read our file
+
+You can do anything after it load.
+
+```js
+if (event.target.files && event.target.files[0]) {
+  reader.onload = function (event) {
+    // Your code
+    if (event.target)
+      if (event.target.result) {
+        textEl.innerText = event.target.result.toString();
+      }
+  }; //end onload()
+  reader.readAsText(event.target.files[0]);
+}
+```
+
+This is **inputChangeHandler function**
+
+```js
+function inputChangeHandler(event) {
+  let reader;
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    reader = new FileReader();
+  } else {
     alert(
-      "Invalid file type. Please select an image file (JPG, JPEG, PNG, GIF)."
+      "The File APIs are not fully supported by your browser. Fallback required."
     );
-    event.target.value = "";
-    return false;
+    return;
   }
 
-  const imageURL = URL.createObjectURL(file);
-  previewEl.setAttribute("src", imageURL);
-});
+  if (event.target.files && event.target.files[0]) {
+    reader.onload = function (event) {
+      if (event.target)
+        if (event.target.result) {
+          textEl.innerText = event.target.result.toString();
+        }
+    }; //end onload()
+    reader.readAsText(event.target.files[0]);
+  }
+}
 ```
 
 ### On Browser
 
 **Before**  
-![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)  
+![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)
 
 **After**  
 ![After](https://hackmd.io/_uploads/S13ff7iUn.png)
 
 ## Resource
 
-[GitHub](https://github.com/metaphorlism/data-structures/tree/main/stack)
+[GitHub](https://github.com/metaphorlism/html-css-javascript/tree/main/text-import)

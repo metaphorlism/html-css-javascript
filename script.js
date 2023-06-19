@@ -1,28 +1,26 @@
 const inputEl = document.getElementById("input");
-const previewEl = document.getElementById("preview");
+const textEl = document.getElementById("text");
 
-// Create on change function input for #input
-inputEl.addEventListener("change", (event) => {
-  // Get the file from input
-  const file = event.target.files[0];
+inputEl.addEventListener("change", inputChangeHandler);
 
-  // You can set allow extension before set file into image tag in html
-  // Using regex in order to check filename extension
-  // \.jpg | \.jpeg | \.png | \.gif ... are file extension you can add and remove
-  // '\' to escape the '.' character
-  // '$' anchors the pattern to the end of the string
-  // 'i' case-insensitive
-  const allowedExtensions = /(\.jpg|\.jpeg|\.png|\.gif)$/i;
-
-  // Check the file extension
-  if (!allowedExtensions.exec(file.name)) {
+function inputChangeHandler(event) {
+  let reader;
+  if (window.File && window.FileReader && window.FileList && window.Blob) {
+    reader = new FileReader();
+  } else {
     alert(
-      "Invalid file type. Please select an image file (JPG, JPEG, PNG, GIF)."
+      "The File APIs are not fully supported by your browser. Fallback required."
     );
-    event.target.value = "";
-    return false;
+    return;
   }
 
-  const imageURL = URL.createObjectURL(file);
-  previewEl.setAttribute("src", imageURL);
-});
+  if (event.target.files && event.target.files[0]) {
+    reader.onload = function (event) {
+      if (event.target)
+        if (event.target.result) {
+          textEl.innerText = event.target.result.toString();
+        }
+    }; //end onload()
+    reader.readAsText(event.target.files[0]);
+  }
+}

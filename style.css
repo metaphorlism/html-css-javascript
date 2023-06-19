@@ -2,18 +2,19 @@
 *::after,
 *::before {
   margin: 0;
-  padding: 0;
   box-sizing: border-box;
-  font-family: monospace;
 }
 
-#preview {
-  height: 100%;
-}
-
-.container {
+#container {
   display: flex;
-  justify-content: center;
-  width: 500px;
-  height: 500px;
+  flex-direction: column;
+  width: 50rem;
+  margin: 0 auto;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+
+#text {
+  resize: none;
+  overflow: hidden;
 }
