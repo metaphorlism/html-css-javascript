@@ -133,4 +133,4 @@ function inputChangeHandler(event) {
 
 ## Resource
 
-[GitHub](https://github.com/metaphorlism/html-css-javascript/tree/main/text-import)
+[GitHub](https://github.com/metaphorlism/html-css-javascript/tree/text-import)
