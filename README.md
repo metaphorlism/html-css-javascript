@@ -1,6 +1,6 @@
 # Image Preview
 
-Import your text from your text file into your website using HTML, CSS and JavaScript.
+Preview your image using HTML, CSS and JavaScript.
 
 ## Code
 
@@ -64,7 +64,7 @@ inputEl.addEventListener("change", (event) => {
 ### On Browser
 
 **Before**  
-![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)  
+![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)
 
 **After**  
 ![After](https://hackmd.io/_uploads/S13ff7iUn.png)
