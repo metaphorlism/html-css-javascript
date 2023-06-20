@@ -1,7 +1,7 @@
-# ReactJS/NextJS
+# HTML, CSS and JavaScript
 
 ## Introduction
-In this repository is about ReactJS/NextJS projects. Any project relate to react library will publish in here.
+In this repository is about vanilla website projects.
 
 ## How to get into each project?
 
