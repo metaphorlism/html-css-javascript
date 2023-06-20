@@ -126,10 +126,12 @@ function inputChangeHandler(event) {
 ### On Browser
 
 **Before**  
-![Before](https://hackmd.io/_uploads/H1_kzXsIn.png)
+![Before](https://github.com/metaphorlism/html-css-javascript/assets/46731773/50e7cd7e-0c13-41bd-87e9-db000c93b9f2)
+
 
 **After**  
-![After](https://hackmd.io/_uploads/S13ff7iUn.png)
+![After](https://github.com/metaphorlism/html-css-javascript/assets/46731773/455f2a01-0b1b-4778-8bdf-d649bb44fea4)
+
 
 ## Resource
 
