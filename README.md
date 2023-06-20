@@ -150,9 +150,13 @@ function inputChangeHandler(event) {
 
 ### On Browser
 
-**Before**
+**Before**  
 
-**After**
+![Before](https://github.com/metaphorlism/html-css-javascript/assets/46731773/9bf4330e-1457-47a8-ae3f-f84e948abaf0)
+
+**After**  
+
+![After](https://github.com/metaphorlism/html-css-javascript/assets/46731773/ea1d050a-95b2-4e4d-afab-05f6f64b3cd9)
 
 
 ## Resource
