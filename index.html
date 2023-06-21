@@ -4,20 +4,21 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <script src="/drawdown.js"></script>
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/a11y-dark.min.css"
-    />
-    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
+    <title>WorkerJS</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <div class="flex flex-col items-center">
-      <input type="file" id="input" accept=".md, text/markdown" />
-      <div id="text" class="prose"></div>
+    <div class="container without-worker">
+      <h1>Without Worker</h1>
+      <button class="heavyTask-btn">Heavy Task</button>
+      <button class="lightTask-btn">Light Task</button>
     </div>
-    <script src="/script.js"></script>
+    <div class="container with-worker">
+      <h1>With Worker</h1>
+      <button class="heavyTask-btn">Heavy Task</button>
+      <button class="lightTask-btn">Light Task</button>
+    </div>
+    <script src="/with-worker/script.js"></script>
+    <script src="/without-worker/script.js"></script>
   </body>
 </html>
