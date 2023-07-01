@@ -30,7 +30,7 @@ We will create normal website to test how worker works in webs.
 
 ### CSS
 
-We are styling it a bit to change background as a light task.
+We are styling it a bit to change the background as a delicate task.
 
 ```css
 *,
@@ -70,8 +70,8 @@ body {
 
 ### JavaScript
 
-We will provide only worker js file and how it works in this blog post.
-In our js file that's using to handle user interaction. `script.js`
+We will provide only the worker js file and how it works in this blog post.
+In our js file that's used to handle user interaction. `script.js`
 
 ```js
 const heavyTaskBtnWorker = document.querySelector(
@@ -84,12 +84,12 @@ const containerElWorker = document.querySelector(".with-worker");
 
 // Checking Worker is available
 if (window.Worker) {
-  // Create new intance of Worker
-  // Passing our worker js to it as parameter
+  // Create new instance of Worker
+  // Passing our worker js to it as a parameter
   const worker = new Worker("./worker.js");
 
-  // Everytimes heavy task button click
-  // We will post message to our worker
+  // Everytime heavy task button click
+  // We will post a message to our worker
   heavyTaskBtnWorker.addEventListener("click", () => {
     worker.postMessage("NUMBER");
     console.log("Message posted to worker");
@@ -104,7 +104,7 @@ if (window.Worker) {
   console.log("Your browser doesn't support web workers.");
 }
 
-// In light task we will change background color of the container
+// In light task we will change the background color of the container
 lightTaskBtnWorker.addEventListener("click", () => {
   containerElWorker.classList.toggle("brown");
 });
@@ -113,9 +113,9 @@ lightTaskBtnWorker.addEventListener("click", () => {
 This is our worker file. `worker.js`
 
 ```js
-// This self is refer to worker object
+// This self refers to worker object
 // Worker object have onmessage event
-// Trigger everytimes postMessage method is used.
+// Trigger every time postMessage method is used.
 self.onmessage = function (e) {
   console.log("Worker: Message received from main script");
   // This is our heavy task
@@ -123,16 +123,20 @@ self.onmessage = function (e) {
   for (let i = 1; i < 5_000_000_000; i++) {
     num += i;
   }
-  // Will post message to main thread when task is completed.
+  // Will post a message to the main thread when the task is completed.
   this.postMessage(num);
 };
 ```
 
 ### On Browser
 
-**Before**
+![Example on browser](https://github.com/metaphorlism/html-css-javascript/assets/46731773/b36c4114-fce7-45fa-9c04-1cbd4bd05529)
 
-**After**
+- Difference
+  - Without Worker
+    - Heavy Task will freeze your browser
+  - With Worker
+    - Heavy Task will not freeze your browser
 
 ## Resource
 
