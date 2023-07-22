@@ -1,0 +1,121 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #acacac;
+  font-family: sans-serif;
+}
+
+#dropdown {
+  width: 25rem;
+  margin: 0 auto;
+  margin-top: 20rem;
+  position: relative;
+}
+
+#inputField {
+  display: flex;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  justify-content: space-between;
+  border-radius: 0.75rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  background: #eee;
+}
+#inputField #selectedValue {
+  text-transform: capitalize;
+}
+#inputField img {
+  width: 30px;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+#inputField::-moz-placeholder {
+  font-weight: bold;
+  color: rgba(100, 116, 139, 0.7);
+}
+#inputField::placeholder {
+  font-weight: bold;
+  color: rgba(100, 116, 139, 0.7);
+}
+#inputField:focus {
+  outline: none;
+  outline: rgb(14, 165, 233) solid 3px;
+  outline-offset: 0;
+}
+
+#dropdown[data-selected=""] #inputField #placeholder {
+  display: inline;
+}
+
+#dropdown:not([data-selected=""]) #inputField #placeholder {
+  display: none;
+}
+
+#dropdown[data-selected=""] #inputField #selectedValue {
+  display: none;
+}
+
+#dropdown:not([data-selected=""]) #inputField #selectedValue {
+  display: inline;
+}
+
+#dropdown[data-state=expended] #inputField img {
+  rotate: 180deg;
+}
+
+#options {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  margin-top: 0.5rem;
+  overflow: hidden;
+  border-radius: 0.25rem;
+  scale: 100% 0;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background: #eee;
+  translate: 0 -50%;
+}
+#options .optionItem {
+  position: relative;
+  z-index: 10;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 700;
+  text-transform: capitalize;
+  cursor: pointer;
+}
+#options .optionItem:hover {
+  background-color: #dfdfdf;
+}
+#options .optionItem[data-state=active]:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: 0.5rem;
+  background-color: rgb(14, 165, 233);
+}
+
+#dropdown[data-state=expended] #options {
+  translate: 0 0;
+  scale: 100% 100%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}/*# sourceMappingURL=style.css.map */

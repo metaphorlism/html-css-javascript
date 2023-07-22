@@ -1,42 +1,30 @@
-import moment from "moment";
+const dropDownEl = document.querySelector("#dropdown");
+const inputFieldEl = document.querySelector("#inputField");
+const selectedValueEl = document.querySelector("#selectedValue");
 
-// Let's make date and time with moment
-// With parameter
-console.log(moment("2023-07-14").format("YYYY MM DD"));
-// Without parameter
-// moment will get current date and time
-console.log(moment().format("YYYY MMMM DD"));
+const optionItemEls = document.querySelectorAll(".optionItem");
 
-// Manipulate
-console.log("Manipulate our current datetime:");
-const currentDatetime = moment();
-
-// Add
-console.table({
-  "Current Date": currentDatetime.format("YYYY MMMM DD"),
-  "Add 5 days": currentDatetime.add(5, "d").format("YYYY MMMM DD"),
+inputFieldEl.addEventListener("click", () => {
+  const isExpended = dropDownEl.getAttribute("data-state") === "expended";
+  if (isExpended) dropDownEl.setAttribute("data-state", "");
+  else dropDownEl.setAttribute("data-state", "expended");
 });
 
-// Subtract
-console.table({
-  "Current Date": currentDatetime.format("YYYY MMMM DD"),
-  "Subtract 10 months": currentDatetime
-    .subtract(10, "M")
-    .format("YYYY MMMM DD"),
-});
-
-// Start of Time
-console.table({
-  "Current Date": currentDatetime.format("YYYY MMMM DD"),
-  "1st day of current date is : ": currentDatetime
-    .startOf("year")
-    .format("dddd"),
-});
-
-// End of Time
-console.table({
-  "Current Date": currentDatetime.format("YYYY MMMM DD"),
-  "Last day of current date is : ": currentDatetime
-    .endOf("year")
-    .format("dddd"),
+// Item Select Action
+optionItemEls.forEach((optionItem) => {
+  optionItem.addEventListener("click", () => {
+    const isActive = optionItem.getAttribute("data-state") === "active";
+    if (!isActive) {
+      optionItemEls.forEach((op) => {
+        op.setAttribute("data-state", "");
+      });
+      optionItem.setAttribute("data-state", "active");
+      dropDownEl.setAttribute("data-state", "");
+      selectedValueEl.innerText = optionItem.getAttribute("data-option-name");
+      dropDownEl.setAttribute(
+        "data-selected",
+        optionItem.getAttribute("data-option-name")
+      );
+    }
+  });
 });

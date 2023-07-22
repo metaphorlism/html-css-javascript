@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DropDown Component Desgin</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div data-state="" data-selected="" id="dropdown">
+      <div onclick="{() => setActive((prev) => !prev)}" id="inputField">
+        <span id="placeholder">Select one</span>
+        <span id="selectedValue"></span>
+        <img src="./assets/arrow.svg" />
+      </div>
+      <div
+        id="options"
+        class="group-data-[state=active]:translate-y-0 group-data-[state=active]:scale-y-100"
+      >
+        <div
+          class="optionItem"
+          data-option-name="apple"
+          onclick="e.currentTarget.getAttribute('data-option-name')"
+        >
+          apple
+        </div>
+
+        <div
+          class="optionItem"
+          data-option-name="banana"
+          onclick="e.currentTarget.getAttribute('data-option-name')"
+        >
+          banana
+        </div>
+
+        <div
+          class="optionItem"
+          data-option-name="orange"
+          onclick="e.currentTarget.getAttribute('data-option-name')"
+        >
+          orange
+        </div>
+
+        <div
+          class="optionItem"
+          data-option-name="peach"
+          onclick="e.currentTarget.getAttribute('data-option-name')"
+        >
+          peach
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="./script.js"></script>
+  </body>
+</html>
